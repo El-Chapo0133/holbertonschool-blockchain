@@ -57,5 +57,7 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 int ec_verify(EC_KEY const *key, uint8_t const *msg,
 		size_t msglen, sig_t const *sig);
 
+/* hex printer */
+void _print_hex_buffer(uint8_t const *buf, size_t len);
 
 #endif /* H_HBLK_CRYPTO */
