@@ -31,5 +31,9 @@ uint8_t *sha256(int8_t const *s, size_t len,
 {
 	if (!s || !digest)
 		return (NULL);
+	/**
+	 * use the given function to hash into digest
+	 * and return the ptr to the digest
+	 */
 	return (SHA256((const unsigned char *)s, len, digest));
 }

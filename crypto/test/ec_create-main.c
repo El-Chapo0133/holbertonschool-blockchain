@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../hblk_crypto.h"
+#include "hblk_crypto.h"
 
 /**
  * main - Entry point
