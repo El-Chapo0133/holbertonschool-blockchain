@@ -1,3 +1,5 @@
+#ifndef H_HBLK_CRYPTO
+#define H_HBLK_CRYPTO
 /*
  * ==========================================================================
  *
@@ -15,9 +17,6 @@
  *
  * ==========================================================================
  */
-
-#ifndef H_HBLK_CRYPTO
-#define H_HBLK_CRYPTO
 
 #include <stddef.h>
 #include <stdint.h>
