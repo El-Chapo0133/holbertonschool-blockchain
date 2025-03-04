@@ -31,7 +31,7 @@ int write_private_key(FILE *file, EC_KEY *key)
 
 int write_public_key(FILE *file, EC_KEY *key)
 {
-	if (!PEM_write_PUBKEY(file, key))
+	if (!PEM_write_EC_PUBKEY(file, key))
 	{
 		fprintf(stderr, "Cannot write public key to file");
 		fclose(file);
