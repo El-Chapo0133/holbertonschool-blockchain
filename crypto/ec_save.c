@@ -23,7 +23,7 @@ int write_private_key(FILE *file, EC_KEY *key)
 	if (!PEM_write_ECPrivateKey(file, key, NULL, NULL, 0, NULL, NULL))
 	{
 		fprintf(stderr, "Cannot write private key to file");
-		fclose(f);
+		fclose(file);
 		return (0);
 	}
 	return (1);
@@ -31,7 +31,7 @@ int write_private_key(FILE *file, EC_KEY *key)
 
 int write_public_key(FILE *file, EC_KEY *key)
 {
-	if (!PER_write_PUBKEY(file, key))
+	if (!PEM_write_PUBKEY(file, key))
 	{
 		fprintf(stderr, "Cannot write public key to file");
 		fclose(file);
@@ -46,7 +46,7 @@ int ec_save(EC_KEY *key, char const *folder)
 	char path[PATH_MAX_SIZE] = {0};
 
 	if (!key || !folder)
-		return (NULL);
+		return (0);
 
 	/**
 	 * permissions :
