@@ -18,6 +18,13 @@
 
 #include "hblk_crypto.h"
 
+/**
+ * write_private_key - write the private key using the given file
+ * @file: FILE ptr to use
+ * @key: key to save
+ *
+ * Return: 1 on success 0 on failure
+ */
 int write_private_key(FILE *file, EC_KEY *key)
 {
 	if (!PEM_write_ECPrivateKey(file, key, NULL, NULL, 0, NULL, NULL))
@@ -29,6 +36,13 @@ int write_private_key(FILE *file, EC_KEY *key)
 	return (1);
 }
 
+/**
+ * write_public_key - write the public key using the given file
+ * @file: FILE ptr to use
+ * @key: key to save
+ *
+ * Return: 1 on success 0 on failure
+ */
 int write_public_key(FILE *file, EC_KEY *key)
 {
 	if (!PEM_write_EC_PUBKEY(file, key))
@@ -40,6 +54,13 @@ int write_public_key(FILE *file, EC_KEY *key)
 	return (1);
 }
 
+/**
+ * ec_save - saves an existing EC key pair on the disk
+ * @key: EC_KEY to save
+ * @folder: folder dest
+ *
+ * Return: 1 on success 0 on failure
+ */
 int ec_save(EC_KEY *key, char const *folder)
 {
 	FILE *f; /* requires a FILE, can't use an fd */
