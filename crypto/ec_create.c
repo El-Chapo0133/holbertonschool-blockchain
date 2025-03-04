@@ -28,12 +28,16 @@ EC_KEY *ec_create(void)
 	EC_KEY *key;
 
 	/* create a _struct_ based on EC_CURVE (elliptic) */
-	key = EC_KEY_new_by_curve_name(EC_CURVE);
+	key = EC_KEY_new_by_curve_name(EC_CURVE); /* see: NID_secp256k1 */
 	if (!key) /* uh oh */
 		return (NULL);
+		fprintf(stderr, "Failure " __LINE__ ":" __func__
+				": generating EC_KEY");
 	/* generate the actual key, return 1 on success */
 	if (!EC_KEY_generate_key(key))
 	{
+		fprintf(stderr, "Failure " __LINE__ ":" __func__
+				": generating EC_KEY");
 		/* on failure: free the key */
 		EC_KEY_free(key);
 		return (NULL);
