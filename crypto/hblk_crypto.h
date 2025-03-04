@@ -42,6 +42,7 @@
 #define EC_PUB_LEN 65
 #define PRI_FILENAME "key.pem"
 #define PUB_FILENAME "key_pub.pem"
+#define PATH_MAX_SIZE 256 /* 256 for ext4, 4096 otherwise */
 
 /**
  * struct sig_s - EC signaure struct
