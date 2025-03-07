@@ -56,7 +56,7 @@ int load_private_key(FILE *f, EC_KEY *key)
  *
  * Return: ptr to EC_KEY, NULL otherwise
  */
-EC_KEY *ec_load(char conts *folder)
+EC_KEY *ec_load(char const *folder)
 {
 	FILE *f;
 	char path[PATH_MAX_SIZE] = {0};
