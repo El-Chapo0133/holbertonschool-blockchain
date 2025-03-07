@@ -45,7 +45,7 @@
 #define PATH_MAX_SIZE 256 /* 256 for ext4, 4096 otherwise */
 
 /**
- * struct sig_s - EC signaure struct
+ * struct signature_s - EC signaure struct
  * @sig: signature buffer
  * @len: sig len
  */
