@@ -10,7 +10,7 @@ libhblk_crypto.a: hblk_crypto.h $(OBJ0)
 	ar rcs $(NAME0) $(OBJ0) $(LIBFLAGS)
 
 $(OBJ0):
-	$(CC) $(CFLAGS) -c $< -o $@ $(LIB_FLAGS)
+	$(CC) $(CFLAGS) -c $< -o $@ -lssl
 
 clean:
 	$(RM) *~ $(NAME0)
