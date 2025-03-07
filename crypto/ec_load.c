@@ -45,7 +45,7 @@ int load_private_key(FILE *f, EC_KEY *key)
 {
 	if (!f)
 		return (0);
-	if (!PEM_read_ECPrivateKey(fp, &key, NULL, NULL))
+	if (!PEM_read_ECPrivateKey(f, &key, NULL, NULL))
 		return (0);
 	return (1);
 }
