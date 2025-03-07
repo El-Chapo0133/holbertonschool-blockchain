@@ -4,10 +4,10 @@ LIB_FLAGS = -lssl -crypto
 OBJDIR = targets/
 
 SRC0 = sha256.c ec_create.c ec_to_pub.c ec_from_pub.c ec_save.c ec_load.c ec_sign.c ec_verify .c
-OBJ0 = $(iaddprefix $(OBJDIR) $(SRC0:.c=.o))
+OBJ0 = $(addprefix $(OBJDIR), $(SRC0:.c=.o))
 NAME0 = libhblk_crypto.a
 
-libhblk_crypto.a: hblk_crypto.h $(OBJDIR) $(OBJ0)
+libhblk_crypto.a: hblk_crypto.h $(OBJ0)
 	ar rcs $(NAME0) $(OBJ0) $(LIBFLAGS)
 
 $(OBJDIR)%.o: %.c
@@ -17,6 +17,7 @@ $(OBJDIR):
 	mkdir $(OBJDIR)
 
 clean:
+	$(RM) *~ $(NAME0)
 	rm *.o
 	rm test/*.o
 	rm out
