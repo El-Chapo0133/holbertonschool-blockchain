@@ -25,7 +25,7 @@
  *
  * Return: 1 on success 0 on failure
  */
-int load_public_key(FILE *f, EC_KEY **key)
+int load_public_key(FILE *f, EC_KEY *key)
 {
 	if (!f)
 		return (0);
@@ -41,7 +41,7 @@ int load_public_key(FILE *f, EC_KEY **key)
  *
  * Return: 1 on success 0 on failure
  */
-int load_private_key(FILE *f, EC_KEY **key)
+int load_private_key(FILE *f, EC_KEY *key)
 {
 	if (!f)
 		return (0);
@@ -68,7 +68,7 @@ EC_KEY *ec_load(char const *folder)
 	/* loads public key */
 	sprintf(path, "%s/" PUB_FILENAME, folder);
 	f = fopen(path, "r");
-	if (!f || !load_public_key(f, &key))
+	if (!f || !load_public_key(f, key))
 	{
 		fclose(f);
 		EC_KEY_free(key);
@@ -79,7 +79,7 @@ EC_KEY *ec_load(char const *folder)
 	/* loads private key */
 	sprintf(path, "%s/" PRI_FILENAME, folder);
 	f = fopen(path, "r");
-	if (!f || !load_private_key(f, &key))
+	if (!f || !load_private_key(f, key))
 	{
 		fclose(f);
 		EC_KEY_free(key);
