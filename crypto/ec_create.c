@@ -31,9 +31,9 @@ EC_KEY *ec_create(void)
 	key = EC_KEY_new_by_curve_name(EC_CURVE); /* see: NID_secp256k1 */
 	if (!key) /* uh oh */
 	{
+		fprintf(stderr, "Failure %d:" __func__
+				": generating EC_KEY", __LINE__);
 		return (NULL);
-		fprintf(stderr, "Failure " __LINE__ ":" __func__
-				": generating EC_KEY");
 	}
 	/* generate the actual key, return 1 on success */
 	if (!EC_KEY_generate_key(key))
