@@ -44,17 +44,16 @@
 #define PUB_FILENAME "key_pub.pem"
 #define PATH_MAX_SIZE 256 /* 256 for ext4, 4096 otherwise */
 
-
 /**
  * struct sig_s - EC signaure struct
  * @sig: signature buffer
  * @len: sig len
  */
-typedef struct sig_s
+typedef struct signature_s
 {
 	uint8_t sig[SIG_MAX_LEN];
 	uint8_t len;
-} sig_t;
+} signature_t;
 
 uint8_t *sha256(int8_t const *s, size_t len,
 		uint8_t digest[SHA256_DIGEST_LENGTH]); /* length:32 */
@@ -65,8 +64,8 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN]);
 int ec_save(EC_KEY *key, char const *folder);
 EC_KEY *ec_load(char const *folder);
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
-		size_t msglen, sig_t *sig);
+		size_t msglen, signature_t *sig);
 int ec_verify(EC_KEY const *key, uint8_t const *msg,
-		size_t msglen, sig_t const *sig);
+		size_t msglen, signature_t const *sig);
 
 #endif /* H_HBLK_CRYPTO */
