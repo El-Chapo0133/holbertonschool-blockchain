@@ -29,7 +29,7 @@ int load_public_key(FILE *f, EC_KEY *key)
 {
 	if (!f)
 		return (0);
-	if (!PEM_read_EC_PUBKEY(fp, &key, NULL, NULL))
+	if (!PEM_read_EC_PUBKEY(f, &key, NULL, NULL))
 		return (0);
 	return (1);
 }
