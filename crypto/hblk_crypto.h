@@ -45,15 +45,15 @@
 #define PATH_MAX_SIZE 256 /* 256 for ext4, 4096 otherwise */
 
 /**
- * struct signature_s - EC signaure struct
+ * struct sig_s - EC signaure struct
  * @sig: signature buffer
  * @len: sig len
  */
-typedef struct signature_s
+typedef struct sig_s
 {
 	uint8_t sig[SIG_MAX_LEN];
 	uint8_t len;
-} signature_t;
+} sig_t;
 
 uint8_t *sha256(int8_t const *s, size_t len,
 		uint8_t digest[SHA256_DIGEST_LENGTH]); /* length:32 */
