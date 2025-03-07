@@ -34,6 +34,7 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include <openssl/pem.h>
+#include <openssl/ecdsa.h>
 
 /* Maximum signature octet string length (using 256-bit curve) */
 #define SIG_MAX_LEN 72
