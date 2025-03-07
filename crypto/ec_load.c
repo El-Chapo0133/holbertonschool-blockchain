@@ -25,7 +25,7 @@
  *
  * Return: 1 on success 0 on failure
  */
-int load_public_key(FILE *f, EC_KEY *key)
+int load_public_key(FILE *f, EC_KEY **key)
 {
 	if (!f)
 		return (0);
@@ -41,7 +41,7 @@ int load_public_key(FILE *f, EC_KEY *key)
  *
  * Return: 1 on success 0 on failure
  */
-int load_private_key(FILE *f, EC_KEY *key)
+int load_private_key(FILE *f, EC_KEY **key)
 {
 	if (!f)
 		return (0);
