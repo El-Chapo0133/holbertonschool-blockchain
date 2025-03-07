@@ -8,7 +8,7 @@ OBJ0 = $(SRC0:.c=.o)
 NAME0 = libhblk_crypto.a
 
 libhblk_crypto.a: hblk_crypto.h $(OBJDIR) $(OBJ0)
-	ar rcs $(NAME0) $(OBJ0)
+	$(CC) $(CFLAGS) $(LIB_FLAGS) $(NAME0) $(OBJ0)
 
 $(OBJDIR)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
