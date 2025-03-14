@@ -1,6 +1,7 @@
 /out
 /test.c
 /test
+*.swp
 
 # Prerequisites
 *.d
