@@ -30,7 +30,7 @@
 #include <llist.h>
 
 #define VERSION "0.1"
-#define BLOCKCHAIN_DATA_MAX 1024;
+#define BLOCKCHAIN_DATA_MAX 1024
 
 #define GENESIS_INDEX 0
 #define GENESIS_DIFFICULTY 0
@@ -82,7 +82,7 @@ typedef struct block_data_s
  * @data: data of the block
  * @hash: hash of the block
  */
-typedef block_s
+typedef struct block_s
 {
 	block_metadata_t metadata;
 	block_data_t data;
