@@ -30,6 +30,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <fcntl.h>
 
 #define HBLK_MAGIC "HBLK"
 #define VERSION "0.1"
