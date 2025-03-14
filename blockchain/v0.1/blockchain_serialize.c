@@ -28,20 +28,17 @@
 int blockchain_serialize(blockchain_t const *blockchain,
 		char const *path)
 {
-	int fd, save_fd;
+	int fd;
 
-	save_fd = dup(STDOUT_FILENO);
 	fd = open(path, O_CREAT | O_TRUNC | O_WRONLY | 644);
 	if (fd == -1)
 	{
 		fprintf(stderr, "Cannot open file:%s\n", path);
 		return (-1);
 	}
-	dup2(fd, STDOUT_FILENO);
 
 	(void)blockchain;
-	printf(HBLK_MAGIC VERSION);
+	write(HBLK_MAGIC VERSION, 7, 1, fd);
 
-	dup2(save_fd, STDOUT_FILENO);
 	return (0);
 }
