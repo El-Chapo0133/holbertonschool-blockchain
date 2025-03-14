@@ -20,14 +20,16 @@
 
 /* local header files */
 #include "../../crypto/hblk_crypto.h"
-#include "provided/endianness.h"
+
+/* local linked list library */
+#include <llist.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
-#include <llist.h>
+#include <time.h>
 
 #define VERSION "0.1"
 #define BLOCKCHAIN_DATA_MAX 1024
