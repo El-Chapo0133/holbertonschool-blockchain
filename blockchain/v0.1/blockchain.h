@@ -86,7 +86,7 @@ typedef struct block_s
 {
 	block_info_t info;
 	block_data_t data;
-	uint32_t hash[SHA256_DIGEST_LENGTH];
+	uint8_t hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
 
