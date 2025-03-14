@@ -34,12 +34,12 @@ int blockchain_serialize(blockchain_t const *blockchain,
 	fd = open(path, O_CREAT | O_TRUNC | O_WRONLY | 644);
 	if (fd == -1)
 	{
-		fprintf(stderr, "Cannot open file:%d\n", path);
+		fprintf(stderr, "Cannot open file:%s\n", path);
 		return (-1);
 	}
 	dup2(fd, STDOUT_FILENO);
 
-	printf(HLBK_MAGIC VERSION);
+	printf(HBLK_MAGIC VERSION);
 
 	dup2(save_fd, STDOUT_FILENO);
 	return (0);
