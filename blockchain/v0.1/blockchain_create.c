@@ -34,7 +34,7 @@ blockchain_t *blockchain_create(void)
 	block = malloc(sizeof(block_t));
 	if (!blockchain || !block)
 	{
-		fprintf(stderr, "cannot allocate for chain or block");
+		fprintf(stderr, "cannot allocate for chain or block\n");
 		free(blockchain), free(block), llist_destroy(list, 1, NULL);
 		return (NULL);
 	}
@@ -55,7 +55,7 @@ blockchain_t *blockchain_create(void)
 	/* add the genesis block in front of the llist */
 	if (llist_add_node(list, block, ADD_NODE_FRONT))
 	{
-		fprintf(stderr, "Cannot add node in the llist");
+		fprintf(stderr, "Cannot add node in the llist\n");
 		free(blockchain), free(block), llist_destroy(list, 1, NULL);
 		return (NULL);
 	}

@@ -35,7 +35,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block = malloc(sizeof(block_t));
 	if (!block)
 	{
-		fprintf(stderr, "Cannot allocate new block");
+		fprintf(stderr, "Cannot allocate new block\n");
 		return (NULL);
 	}
 
