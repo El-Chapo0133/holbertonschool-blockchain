@@ -18,8 +18,10 @@
 
 #include "blockchain.h"
 
-/*
+/**
  * blockchain_create - create a blockchain_t
+ *
+ * Return: ptr to newly blockchain struct
  */
 blockchain_t *blockchain_create(void)
 {

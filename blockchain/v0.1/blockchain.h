@@ -45,7 +45,7 @@
 
 
 /**
- * struct block_metadata_s - define the metadata of a block_s
+ * struct block_info_s - define the metadata of a block_s
  *
  * @index: index of the block
  * @difficulty: difficulty of proof of work (hash leading zero)
@@ -78,7 +78,7 @@ typedef struct block_data_s
 /**
  * struct block_s - define a block in the blockchain
  *
- * @metadata: metadata of the block
+ * @info: metadata of the block
  * @data: data of the block
  * @hash: hash of the block
  */
