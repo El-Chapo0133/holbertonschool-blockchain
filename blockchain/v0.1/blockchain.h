@@ -57,9 +57,9 @@ typedef struct block_info_s
 {
 	uint32_t index;
 	uint32_t difficulty;
-	uint32_t timestamp;
-	uint32_t nonce;
-	uint32_t prev_hash[SHA256_DIGEST_LENGTH];
+	uint64_t timestamp;
+	uint64_t nonce;
+	uint8_t prev_hash[SHA256_DIGEST_LENGTH];
 } block_info_t;
 
 /**
