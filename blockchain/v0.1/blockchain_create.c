@@ -38,12 +38,12 @@ blockchain_t *blockchain_create(void)
 	}
 
 	/* meta data settings */
-	(block->metadata).index = GENESIS_INDEX;
-	(block->metadata).difficulty = GENESIS_DIFFICULTY;
-	(block->metadata).timestamp = GENESIS_TIMESTAMP;
-	(block->metadata).nonce = GENESIS_NONCE;
+	(block->info).index = GENESIS_INDEX;
+	(block->info).difficulty = GENESIS_DIFFICULTY;
+	(block->info).timestamp = GENESIS_TIMESTAMP;
+	(block->info).nonce = GENESIS_NONCE;
 	for (index = 0; index < SHA256_DIGEST_LENGTH; index++)
-		(block->metadata).prev_hash[index] = GENESIS_PREV_HASH;
+		(block->info).prev_hash[index] = GENESIS_PREV_HASH;
 	/* data settings */
 	block->data.len = GENESIS_LEN;
 	memcpy(block->data.buffer, GENESIS_BUFFER, GENESIS_LEN);
@@ -58,7 +58,7 @@ blockchain_t *blockchain_create(void)
 	}
 
 	blockchain->chain = list;
-	return (chain);
+	return (blockchain);
 }
 
 

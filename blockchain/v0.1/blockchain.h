@@ -53,14 +53,14 @@
  * @nonce: salt used to hash the block
  * @prev_hash: hash of the previous block
  */
-typedef struct block_metadata_s
+typedef struct block_info_s
 {
 	uint32_t index;
 	uint32_t difficulty;
 	uint32_t timestamp;
 	uint32_t nonce;
 	uint32_t prev_hash[SHA256_DIGEST_LENGTH];
-} block_metadata_t;
+} block_info_t;
 
 /**
  * struct block_data_s - define the data of a block_s
@@ -84,7 +84,7 @@ typedef struct block_data_s
  */
 typedef struct block_s
 {
-	block_metadata_t metadata;
+	block_info_t info;
 	block_data_t data;
 	uint32_t hash[SHA256_DIGEST_LENGTH];
 } block_t;
