@@ -52,6 +52,7 @@ blockchain_t *blockchain_create(void)
 	/* hash set */
 	memcpy(block->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
 
+	/* add the genesis block in front of the llist */
 	if (llist_add_node(list, block, ADD_NODE_FRONT))
 	{
 		fprintf(stderr, "Cannot add node in the llist");
