@@ -38,7 +38,7 @@ int blockchain_serialize(blockchain_t const *blockchain,
 	}
 
 	(void)blockchain;
-	write(HBLK_MAGIC VERSION, 7, 1, fd);
+	write(fd, HBLK_MAGIC VERSION, 7);
 
 	return (0);
 }
