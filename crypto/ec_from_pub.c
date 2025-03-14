@@ -6,19 +6,11 @@
  *    Description:  creates an EC_KEY structure given a public key
  *
  *        Version:  1.0
-<<<<<<< HEAD
  *        Created:  28.02.2025 12:10:51
  *       Revision:  none
  *       Compiler:  gcc
  *
  *         Author:  Loris Levêque (9601), loris@leveque.website
-=======
- *        Created:  03/04/25 13:11:01
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  Loris Leveque 9601@holbertonstudents.com
->>>>>>> 1bcd48c0344b42b402175fc1bae8db53cbc8fdae
  *   Organization:  Holberton
  *
  * ==========================================================================
@@ -35,7 +27,7 @@
 EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 {
 	EC_KEY *key;
-	const EC_POINT *point = NULL;
+	EC_POINT *point = NULL;
 
 	if (!pub)
 		return (NULL);

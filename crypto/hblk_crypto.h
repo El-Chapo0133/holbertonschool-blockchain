@@ -34,6 +34,7 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 #include <openssl/pem.h>
+#include <openssl/ecdsa.h>
 
 /* Maximum signature octet string length (using 256-bit curve) */
 #define SIG_MAX_LEN 72
@@ -49,11 +50,11 @@
  * @sig: signature buffer
  * @len: sig len
  */
-typedef struct signature_s
+typedef struct sig_s
 {
 	uint8_t sig[SIG_MAX_LEN];
 	uint8_t len;
-} signature_t;
+} sig_t;
 
 uint8_t *sha256(int8_t const *s, size_t len,
 		uint8_t digest[SHA256_DIGEST_LENGTH]); /* length:32 */
@@ -64,8 +65,8 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN]);
 int ec_save(EC_KEY *key, char const *folder);
 EC_KEY *ec_load(char const *folder);
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
-		size_t msglen, signature_t *sig);
+		size_t msglen, sig_t *sig);
 int ec_verify(EC_KEY const *key, uint8_t const *msg,
-		size_t msglen, signature_t const *sig);
+		size_t msglen, sig_t const *sig);
 
 #endif /* H_HBLK_CRYPTO */
