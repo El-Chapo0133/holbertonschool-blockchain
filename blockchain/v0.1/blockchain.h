@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include <time.h>
 
+#define HBLK_MAGIC "HBLK"
 #define VERSION "0.1"
 #define BLOCKCHAIN_DATA_MAX 1024
 
