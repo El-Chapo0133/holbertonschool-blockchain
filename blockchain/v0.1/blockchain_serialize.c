@@ -39,7 +39,7 @@ int blockchain_serialize(blockchain_t const *blockchain,
 	}
 	dup2(fd, STDOUT_FILENO);
 
-	(void *)blockchain;
+	(void)blockchain;
 	printf(HBLK_MAGIC VERSION);
 
 	dup2(save_fd, STDOUT_FILENO);
