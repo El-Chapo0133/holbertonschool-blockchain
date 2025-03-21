@@ -21,7 +21,7 @@
 
 /*
  * record_blocks_into_fd - record given node into given fd
- * @node: node to write
+ * @ptr: ptr to node to write
  * @index: index of the node in the chain
  * @arg: void ptr to fd
  *
