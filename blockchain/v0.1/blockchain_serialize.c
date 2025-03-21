@@ -27,18 +27,19 @@
  *
  * Return: 0 on success 1 on failure
  */
-int record_block_into_fd(llist_node_t node, unsigned int index, void *arg)
+int record_block_into_fd(llist_node_t ptr, unsigned int index, void *arg)
 {
 	int fd;
+	block_t *node = ptr;
 
 	(void)index;
 	if (!node || !arg)
 		return (1);
-	fd = (int)arg;
-	write(fd, (void *)&block->info, sizeof(block->info));
-	write(fd, (void *)&block->data.len, sizeof(block->data.len));
-	write(fd, block->data.buffer, block->data.len);
-	write(fd, block->hash, sizeof(block->hash));
+	fd = *(int *)arg;
+	write(fd, (void *)&node->info, sizeof(node->info));
+	write(fd, (void *)&node->data.len, sizeof(node->data.len));
+	write(fd, node->data.buffer, node->data.len);
+	write(fd, node->hash, sizeof(node->hash));
 	return (0);
 }
 
@@ -64,10 +65,10 @@ int blockchain_serialize(blockchain_t const *blockchain,
 	number_of_blocks = llist_size(blockchain->chain);
 	endian = _get_endianness();
 	write(fd, HBLK_MAGIC VERSION, 7);
-	write(fd, endian, sizeof(endian));
-	write(fd, number_of_blocks, sizeof(number_of_blocks));
+	write(fd, &endian, sizeof(endian));
+	write(fd, &number_of_blocks, sizeof(number_of_blocks));
 
-	if (llist_for_each(blockchain->chain, record_block_into_fd, fp))
+	if (llist_for_each(blockchain->chain, record_block_into_fd, &fd))
 	{
 		fprintf(stderr, "Error when trying to write block into fd\n");
 		close(fd);
