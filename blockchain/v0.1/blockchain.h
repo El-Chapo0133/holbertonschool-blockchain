@@ -20,6 +20,7 @@
 
 /* local header files */
 #include "../../crypto/hblk_crypto.h"
+#include "provided/endianness.h"
 
 /* local linked list library */
 #include <llist.h>
