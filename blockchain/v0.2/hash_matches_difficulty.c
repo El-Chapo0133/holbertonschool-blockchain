@@ -29,22 +29,21 @@
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 		uint32_t difficulty)
 {
-	uint32_t count = 0;
-	int index, i;
+	uint32_t count = 0, max_ptr = hash + SHA256_DIGEST_LENGTH;
+	int index;
 	uint8_t *ptr = (uint8_t *)hash;
 
 	if (!hash)
 		return (0);
-	for (index = 0; index < SHA256_DIGEST_LENGTH; index++)
+	for (; ptr < max_ptr; ptr++)
 	{
-		for (i = 7; i >= 0; i--)
+		fprintf(stdout, "%d - ", ptr);
+		for (index = 7; index >= 0; index--)
 		{
-			if ((*ptr >> i) == 1)
+			if ((*ptr >> index) == 1)
 				break;
 			count++;
 		}
-		/* move ptr to next value */
-		ptr++;
 	}
 
 	return (count >= difficulty);
