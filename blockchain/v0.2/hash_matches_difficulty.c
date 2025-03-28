@@ -39,7 +39,7 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 	/* loop over the 32 8-bits (because it's an i bit ptr) */
 	for (; ptr < max_ptr; ptr++)
 	{
-		/* loop into the 8-bits backward (big-endian) */
+		/* loop into the 8-bits backward (little-endian) */
 		for (index = 7; index >= 0; index--)
 		{
 			if ((*ptr >> index) & 1)
