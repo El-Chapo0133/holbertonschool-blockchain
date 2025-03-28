@@ -4,7 +4,7 @@
  *       Filename:  blockchain_difficulty.c
  *
  *    Description: computes the difficulty to assign to a potential
- *				next Block in the Blockchain 
+ *				next Block in the Blockchain
  *
  *        Version:  1.0
  *        Created:  28.03.2025 13:14:14
@@ -19,7 +19,7 @@
 
 #include "blockchain.h"
 
-/*
+/**
  * blockchain_difficulty - computes the difficulty to assign to a potential
  * next Block in the Blockchain
  * @blockchain: blockchain to work with
