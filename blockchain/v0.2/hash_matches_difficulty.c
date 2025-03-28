@@ -39,7 +39,7 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 	{
 		for (i = 7; i >= 0; i--)
 		{
-			if ((*ptr >> index) == 1)
+			if ((*ptr >> i) == 1)
 				break;
 			count++;
 		}
