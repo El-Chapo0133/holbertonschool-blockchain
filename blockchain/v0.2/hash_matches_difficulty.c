@@ -40,9 +40,9 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 	for (; ptr < max_ptr; ptr++)
 	{
 		/* loop into the 8-bits */
-		for (index = 0; index < 8; index++)
+		for (index = 7; index >= 0; index--)
 		{
-			if ((*ptr >> index) == 1)
+			if ((*ptr >> index) & 1)
 				break;
 			count++;
 		}
