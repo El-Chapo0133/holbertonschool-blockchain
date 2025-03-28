@@ -27,7 +27,7 @@
 uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 {
 	uint64_t elapsed, expected;
-	block_t *last, last_adjusted;
+	block_t *last, *last_adjusted;
 
 	last = llist_get_tail(blockchain->chain);
 	if (!last || last->info.index == 0 ||
@@ -35,7 +35,7 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		return (last->info.difficulty);
 
 	last_adjusted = llist_get_node_at(blockchain->chain,
-			last->info.index + 1 - DIFFICULTY_ADJUTMENT_INTERVAL);
+			last->info.index + 1 - DIFFICULTY_ADJUSTMENT_INTERVAL);
 	elapsed = last->info.timestamp - last_adjusted->info.timestamp;
 	expected = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
 
