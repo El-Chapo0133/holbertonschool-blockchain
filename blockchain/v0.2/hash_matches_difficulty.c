@@ -38,7 +38,7 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 		return (0);
 	for (; ptr < max_ptr; ptr++)
 	{
-		fprintf(stdout, "%hhn - ", ptr);
+		fprintf(stdout, "-\n");
 		for (index = 7; index >= 0; index--)
 		{
 			if ((*ptr >> index) == 1)
