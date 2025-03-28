@@ -23,6 +23,8 @@
  * blockchain_difficulty - computes the difficulty to assign to a potential
  * next Block in the Blockchain
  * @blockchain: blockchain to work with
+ *
+ * Return: difficulty for the next block
  */
 uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 {
