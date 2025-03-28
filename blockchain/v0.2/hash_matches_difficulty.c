@@ -36,10 +36,11 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 
 	if (!hash)
 		return (0);
+	/* loop over the 32 8-bits */
 	for (; ptr < max_ptr; ptr++)
 	{
-		fprintf(stdout, "-\n");
-		for (index = 7; index >= 0; index--)
+		/* loop into the 8-bits */
+		for (index = 0; index < 8; index++)
 		{
 			if ((*ptr >> index) == 1)
 				break;
