@@ -24,7 +24,7 @@
  */
 void block_mine(block_t *block)
 {
-	uint64_t nonce;
+	uint64_t nonce = 0;
 
 	do
 	{
