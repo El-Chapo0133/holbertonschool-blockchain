@@ -47,7 +47,6 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 			count++;
 		}
 	}
-	fprintf(stdout, "%d\n", count);
 
 	return (count >= difficulty);
 }
