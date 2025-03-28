@@ -31,7 +31,7 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 {
 	uint32_t count = 0;
 	int index;
-	uint8_t *ptr = (uint8_t *)hash, max_ptr = hash + SHA256_DIGEST_LENGTH;
+	uint8_t *ptr = (uint8_t *)hash, *max_ptr = hash + SHA256_DIGEST_LENGTH;
 
 	if (!hash)
 		return (0);
