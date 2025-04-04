@@ -18,7 +18,7 @@
 
 #include "transaction.h"
 
-/*
+/**
  * tx_out_create - allocates and initializes a transaction output structure
  * @amount: amount of the transaction
  * @pub: public key of the receiver
