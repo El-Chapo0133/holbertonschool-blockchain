@@ -38,6 +38,6 @@ unspent_tx_out_t *unspent_tx_out_create(
 		return (NULL);
 	memcpy(utx->block_hash, block_hash, sizeof(utx->block_hash));
 	memcpy(utx->tx_id, tx_id, sizeof(utx->tx_id));
-	memcpy(utx->out, out, sizeof(utx->out));
+	memcpy(&utx->out, out, sizeof(utx->out));
 	return (utx);
 }
