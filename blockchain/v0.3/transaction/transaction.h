@@ -20,6 +20,9 @@
 
 #include "blockchain.h"
 
+/* local linked list library */
+#include <llist.h>
+
 /**
  * struct transaction_s - Transaction structure
  *
