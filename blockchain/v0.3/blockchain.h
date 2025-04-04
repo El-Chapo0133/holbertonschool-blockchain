@@ -21,6 +21,7 @@
 /* local header files */
 #include "../../crypto/hblk_crypto.h"
 #include "provided/endianness.h"
+#include "transaction/transaction.h"
 
 /* local linked list library */
 #include <llist.h>
@@ -94,6 +95,7 @@ typedef struct block_s
 {
 	block_info_t info;
 	block_data_t data;
+	llist_t *transactions;
 	uint8_t hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
@@ -106,6 +108,7 @@ typedef struct block_s
 typedef struct blockchain_s
 {
 	llist_t *chain;
+	llist_t *unspent;
 } blockchain_t;
 
 
