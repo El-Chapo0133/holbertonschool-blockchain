@@ -34,7 +34,7 @@ tx_out_t *tx_out_create(uint32_t amount, uint8_t const pub[EC_PUB_LEN])
 	transaction->amount = amount;
 	memcpy(transaction->pub, pub, EC_PUB_LEN);
 
-	if (!sha256((uint8_t const *)transaction,
+	if (!sha256((int8_t const *)transaction,
 			sizeof(transaction->amount) + EC_PUB_LEN,
 			transaction->hash))
 	{
