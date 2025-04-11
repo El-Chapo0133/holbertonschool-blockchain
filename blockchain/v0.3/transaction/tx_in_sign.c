@@ -46,7 +46,7 @@ sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
 		return (NULL);
 	ec_to_pub(sender, pubkey);
 
-	if (memcmp(pubkey, temp->out.pub, EC_PUB_KEY) != 0)
+	if (memcmp(pubkey, temp->out.pub, EC_PUB_LEN) != 0)
 		return (NULL);
 	ec_sign(sender, tx_id, 32, &in->sig);
 	return (&in->sig);
