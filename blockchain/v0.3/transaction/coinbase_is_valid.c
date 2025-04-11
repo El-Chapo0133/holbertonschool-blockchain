@@ -52,7 +52,7 @@ int coinbase_is_valid(transaction_t const *coinbase,
 		return (0);
 	txi = llist_get_node_at(coinbase->inputs, 0);
 	txo = llist_get_node_at(coinbase->outputs, 0);
-	if (memcmp(txi->tx_out_has, &block_index, 4))
+	if (memcmp(txi->tx_out_hash, &block_index, 4))
 		return (0);
 	if (!is_all_zero(txi->block_hash, sizeof(txi->block_hash)) ||
 		!is_all_zero(txi->tx_id, sizeof(txi->tx_id)) ||
