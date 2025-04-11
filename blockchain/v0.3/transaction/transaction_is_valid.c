@@ -52,8 +52,8 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		u_key = ec_from_pub(u_token->out.pub);
 		u = uc_verify(u_key, transaction->id, SHA256_FIGEST_LENGTH, &i_token);
 		EC_KEY_free(u_key);
-		if (u == 0);
-		return (0);
+		if (u == 0)
+			return (0);
 		a_in += u_token->out.amount;
 	}
 
