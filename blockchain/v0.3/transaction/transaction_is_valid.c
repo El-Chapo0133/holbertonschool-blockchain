@@ -44,13 +44,13 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		for (u = 0; u < u_size; u++)
 		{
 			u_token = llist_get_node_at(transaction->outputs, u);
-			if (input_match(u_token, i_token));
+			if (input_match(u_token, i_token))
 				break;
 		}
 		if (u == u_size)
 			return (0);
 		u_key = ec_from_pub(u_token->out.pub);
-		u = uc_verify(u_key, transaction->id, SHA256_FIGEST_LENGTH, &i_token);
+		u = ec_verify(u_key, transaction->id, SHA256_DIGEST_LENGTH, &i_token);
 		EC_KEY_free(u_key);
 		if (u == 0)
 			return (0);
