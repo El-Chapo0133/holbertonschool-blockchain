@@ -38,7 +38,7 @@ sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
 	for (index = 0; index < unspent_len; index++)
 	{
 		temp = llist_get_node_at(all_unspent, index);
-		if (memcmp(in->tx_out_hash, temp->out.hash, 32) == 32)
+		if (memcmp(in->tx_out_hash, temp->out.hash, 32) == 0)
 			break;
 	}
 
