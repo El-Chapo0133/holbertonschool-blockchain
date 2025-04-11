@@ -18,7 +18,7 @@
 
 #include "transaction.h"
 
-/*
+/**
  * tx_in_create - allocate a new tx_in_t struct
  * @unspent: ptr to unspent struct
  *
