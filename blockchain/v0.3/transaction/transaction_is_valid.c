@@ -31,7 +31,7 @@ int input_match(unspent_tx_out_t *u_token, tx_in_t *i_token)
 		return (0);
 	if (memcmp(u_token->tx_id, i_token->tx_id, 32))
 		return (0);
-	if (memcmp(u_token->block_hash, i_token-block_hash, 32))
+	if (memcmp(u_token->block_hash, i_token->block_hash, 32))
 		return (0);
 	return (1);
 }
@@ -68,7 +68,7 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		if (u == u_size)
 			return (0);
 		u_key = ec_from_pub(u_token->out.pub);
-		u = ec_verify(u_key, transaction->id, SHA256_DIGEST_LENGTH, &i_token);
+		u = ec_verify(u_key, transaction->id, SHA256_DIGEST_LENGTH, &i_token->sig);
 		EC_KEY_free(u_key);
 		if (u == 0)
 			return (0);
