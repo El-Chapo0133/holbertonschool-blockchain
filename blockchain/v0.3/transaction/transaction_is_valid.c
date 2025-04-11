@@ -43,7 +43,8 @@ int input_match(unspent_tx_out_t *u_token, tx_in_t *i_token)
  *
  * Return: 1 if valid, 0 if not
  */
-int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
+int transaction_is_valid(transaction_t const *transaction,
+		llist_t *all_unspent)
 {
 	tx_in_t *i_token;
 	unspent_tx_out_t *u_token;
