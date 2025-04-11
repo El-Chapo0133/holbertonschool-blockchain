@@ -19,6 +19,24 @@
 #include "transaction.h"
 
 /**
+ * input_match - checks if an unspent token matches an input token
+ * @u_token: unspent token
+ * @i_token: input token
+ *
+ * Return: 1 if it matches, 0 otherwise
+ */
+int input_match(unspend_tx_out_t *u_token, tx_in_t *i_token)
+{
+	if (memcmp(u_token->out.hash, i_token->tx_out_hash, 32))
+		return (0);
+	if (memcmp(u_token->tx_id, i_token->tx_id, 32))
+		return (0);
+	if (memcmp(u_token->block_hash, i_token-block_hash, 32))
+		return (0);
+	return (1);
+}
+
+/**
  * transaction_is_valid - checks if a transaction is valid
  * @transaction: transaction to check
  * @all_unspent: llist of all unspent transaction
@@ -61,24 +79,6 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		a_out += ((tx_out_t *)llist_get_node_at(transaction->outputs,i))->amount;
 
 	if (a_in != a_out)
-		return (0);
-	return (1);
-}
-
-/**
- * input_match - checks if an unspent token matches an input token
- * @u_token: unspent token
- * @i_token: input token
- *
- * Return: 1 if it matches, 0 otherwise
- */
-int input_match(unspend_tx_out_t *u_token, tx_in_t *i_token)
-{
-	if (memcmp(u_token->out.hash, i_token->tx_out_hash, 32))
-		return (0);
-	if (memcmp(u_token->tx_id, i_token->tx_id, 32))
-		return (0);
-	if (memcmp(u_token->block_hash, i_token-block_hash, 32))
 		return (0);
 	return (1);
 }
