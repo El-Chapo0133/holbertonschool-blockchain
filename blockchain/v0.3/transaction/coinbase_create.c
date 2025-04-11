@@ -41,6 +41,9 @@ transaction_t *coinbase_create(EC_KEY const *receiver,
 	ec_to_pub(receiver, key_out);
 	o_token = tx_out_create(COINBASE_AMOUNT, key_out);
 
+	out->inputs = llist_create(NT_SUPPORT_FALSE);
+	out->outputs = llist_create(NT_SUPPORT_FALSE);
+
 	llist_add_node(out->inputs, i_token, ADD_NODE_REAR);
 	llist_add_node(out->outputs, o_token, ADD_NODE_REAR);
 
