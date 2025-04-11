@@ -27,7 +27,7 @@
  */
 int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 {
-	in_t *i_token;
+	tx_in_t *i_token;
 	unspent_tx_out_t *u_token;
 	int index, u, u_size;
 	uint32_t a_in = 0, a_out = 0;
