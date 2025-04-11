@@ -33,7 +33,7 @@ tx_in_t *tx_in_create(unspent_tx_out_t const *unspent)
 
 	memcpy(txi->block_hash, unspent->block_hash, sizeof(unspent->block_hash));
 	memcpy(txi->tx_id, unspent->tx_id, sizeof(unspent->tx_id));
-	memcpy(txi->tx_out_hash, unspent->out.hash, sizeof(unspent->out.hash));
+	memcpy(txi->tx_out_hash, unspent->out.hash, sizeof(unspent->tx_out_hash));
 	return (txi);
 }
 
