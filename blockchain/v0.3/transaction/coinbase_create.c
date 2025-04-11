@@ -22,7 +22,7 @@ transaction_t *coinbase_create(EC_KEY const *receiver,
 		uint32_t block_index)
 {
 	transaction_t *out = malloc(sizeof(transaction_t));
-	tx_int_t *i_token;
+	tx_in_t *i_token;
 	tx_out_t *o_token;
 	uint8_t key_out[EC_PUB_LEN];
 
