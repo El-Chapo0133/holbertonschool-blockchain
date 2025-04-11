@@ -32,7 +32,7 @@ sig_t *tx_in_sign(tx_in_t *in, uint8_t const tx_id[SHA256_DIGEST_LENGTH],
 {
 	int unspent_len, index;
 	unspent_tx_out_t *temp;
-	int8_t pubkey[EC_PUB_LEN];
+	uint8_t pubkey[EC_PUB_LEN];
 
 	unspent_len = llist_size(all_unspent);
 	for (index = 0; index < unspent_len; index++)
