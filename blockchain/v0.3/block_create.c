@@ -31,11 +31,13 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 {
 	block_t *block;
 	int index;
+	llist_t *transactions = llist_create(MT_SUPPORT_FALSE);
 
 	block = malloc(sizeof(block_t));
-	if (!block)
+	if (!block || !transaction)
 	{
-		fprintf(stderr, "Cannot allocate new block\n");
+		fprintf(stderr, "Cannot allocate new block or transaction\n");
+		llist_destroy(transactions, 0, NULL);
 		return (NULL);
 	}
 
@@ -50,6 +52,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block->data.len = (data_len > BLOCKCHAIN_DATA_MAX ?
 			BLOCKCHAIN_DATA_MAX : data_len);
 	memcpy(block->data.buffer, data, block->data.len);
+	block->transactions = transactions;
 	return (block);
 }
 
