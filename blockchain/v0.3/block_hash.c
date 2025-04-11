@@ -26,7 +26,12 @@
 uint8_t *block_hash(block_t const *block,
 		uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 {
-	size_t len = sizeof(block->info) + block->data.len;
+	int tx_len, target_len, index, offset;
+	int8_t *hash_target;
+	transaction_t *token;
 
+	if (block->transactions)
+		tx_len = llist_size(block->transactions);
+	target_len = offset + 32 * tx_len;
 	return (sha256((int8_t const *)block, len, hash_buf));
 }

@@ -34,5 +34,6 @@ void blockchain_destroy(blockchain_t *blockchain)
 		block = llist_pop(blockchain->chain);
 	}
 	llist_destroy(blockchain->chain, 0, NULL);
+	llist_destroy(blockchain->unspent, 1, NULL);
 	free(blockchain);
 }

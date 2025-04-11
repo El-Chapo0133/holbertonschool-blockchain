@@ -61,6 +61,7 @@ blockchain_t *blockchain_create(void)
 	}
 
 	blockchain->chain = list;
+	blockchain->unspent = llist_create(MT_SUPPORT_FALSE);
 	return (blockchain);
 }
 
