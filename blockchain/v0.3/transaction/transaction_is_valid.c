@@ -25,7 +25,7 @@
  *
  * Return: 1 if it matches, 0 otherwise
  */
-int input_match(unspend_tx_out_t *u_token, tx_in_t *i_token)
+int input_match(unspent_tx_out_t *u_token, tx_in_t *i_token)
 {
 	if (memcmp(u_token->out.hash, i_token->tx_out_hash, 32))
 		return (0);
