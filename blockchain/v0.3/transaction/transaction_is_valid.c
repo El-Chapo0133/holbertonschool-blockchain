@@ -61,14 +61,15 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 		i_token = llist_get_node_at(transaction->inputs, index);
 		for (u = 0; u < u_size; u++)
 		{
-			u_token = llist_get_node_at(transaction->outputs, u);
+			u_token = llist_get_node_at(all_unspent, u);
 			if (input_match(u_token, i_token))
 				break;
 		}
 		if (u == u_size)
 			return (0);
 		u_key = ec_from_pub(u_token->out.pub);
-		u = ec_verify(u_key, transaction->id, SHA256_DIGEST_LENGTH, &i_token->sig);
+		u = ec_verify(u_key, transaction->id, SHA256_DIGEST_LENGTH,
+				&i_token->sig);
 		EC_KEY_free(u_key);
 		if (u == 0)
 			return (0);
@@ -76,7 +77,8 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 	}
 
 	for (index = 0; index < llist_size(transaction->outputs); index++)
-		a_out += ((tx_out_t *)llist_get_node_at(transaction->outputs, index))->amount;
+		a_out += ((tx_out_t *)llist_get_node_at(transaction->outputs,
+					index))->amount;
 
 	if (a_in != a_out)
 		return (0);
