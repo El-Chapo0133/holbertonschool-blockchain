@@ -76,7 +76,7 @@ int transaction_is_valid(transaction_t const *transaction, llist_t *all_unspent)
 	}
 
 	for (index = 0; index < llist_size(transaction->outputs); index++)
-		a_out += ((tx_out_t *)llist_get_node_at(transaction->outputs,i))->amount;
+		a_out += ((tx_out_t *)llist_get_node_at(transaction->outputs, index))->amount;
 
 	if (a_in != a_out)
 		return (0);
