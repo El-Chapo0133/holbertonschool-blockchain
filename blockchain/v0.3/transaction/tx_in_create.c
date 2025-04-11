@@ -34,6 +34,7 @@ tx_in_t *tx_in_create(unspent_tx_out_t const *unspent)
 	memcpy(txi->block_hash, unspent->block_hash, SHA256_DIGEST_LENGTH);
 	memcpy(txi->tx_id, unspent->tx_id, sizeof(unspent->tx_id));
 	memcpy(txi->tx_out_hash, unspent->out.hash, SHA256_DIGEST_LENGTH);
+	memset(&txi->sig, 0, sizeof(txi->sig));
 	return (txi);
 }
 
