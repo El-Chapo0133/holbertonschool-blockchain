@@ -34,7 +34,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	llist_t *transactions = llist_create(MT_SUPPORT_FALSE);
 
 	block = malloc(sizeof(block_t));
-	if (!block || !transactions)
+	if (!block || !transactions)
 	{
 		fprintf(stderr, "Cannot allocate new block or transaction\n");
 		llist_destroy(transactions, 0, NULL);
