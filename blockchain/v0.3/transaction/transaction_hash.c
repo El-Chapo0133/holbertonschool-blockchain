@@ -53,7 +53,7 @@ uint8_t *transaction_hash(transaction_t const *transaction,
 	{
 		/* doomed loop because i can't use ->next or ++ */
 		temp_out = llist_get_node_at(transaction->outputs, index);
-		memcpy(hash_target + offset, temp_out, 32);
+		memcpy(hash_target + offset, temp_out->hash, 32);
 		offset += 32;
 	}
 
