@@ -47,7 +47,7 @@ int foreach_input(llist_node_t node, unsigned int idx, void *_args)
 {
 	void **args = _args;
 
-	llist_remove_node(args[0], find_unspent, node->tx_out_hash, 1, free);
+	llist_remove_node(args[0], find_unspent, *node->tx_out_hash, 1, free);
 	return (0);
 	(void)idx;
 	(void)args;
