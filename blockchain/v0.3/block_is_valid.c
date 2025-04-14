@@ -17,6 +17,25 @@
  */
 #include "blockchain.h"
 
+int check_transaction(block_t const *block, llist_t *all_unspent)
+{
+	int index;
+	transaction_t *t;
+
+	for (index = 0; index < llist_size(block->transactions); index++)
+	{
+		t = llist_get_node_at(block->transactions, index);
+		if (i == 0 && !coinbase_is_valid(t, block->info.index))
+			return (1);
+		else if (!transaction_is_valid(t, all_unspent))
+			return (1);
+	}
+	if (index == 0)
+		return (1);
+	return (0);
+}
+
+
 /**
  * block_is_valid - checks if this and previous block are valid
  * @block: pointer to this block in the chain
@@ -46,5 +65,8 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		return (1);
 	if (!hash_matches_difficulty(block->hash, block->info.difficulty))
 		return (1);
+	if (check_transaction(block, all_unspent))
+		return (1);
+
 	return (0);
 }
