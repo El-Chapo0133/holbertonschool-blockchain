@@ -18,9 +18,9 @@
 
 #include "blockchain.h"
 
-#define CLEAN_UP (free(chain), close(fd))
+#define CLEAN_UP (free(list), close(fd))
 #define CLEAN_UP_BLOCKS (free(block), llist_destroy(list, 1, NULL))
-#define CHECK_ENDIAN(x) (endianness ? SWAPENDIAN(x) : (void)0)
+#define CHECK_ENDIAN(x) (endian ? SWAPENDIAN(x) : (void)0)
 
 
 /**
@@ -45,7 +45,7 @@ llist_t deserialize_blocks(int fd, uint32_t size, uint8_t endian)
 		if (!block)
 			return (CLEAN_UP, NULL);
 		if (read(fd, &(block->info), sizeof(block->info))
-				!= sizeof(block_info))
+				!= sizeof(block->info))
 			return (CLEAN_UP, NULL);
 		CHECK_ENDIAN(block->info.index);
 		CHECK_ENDIAN(block->info.difficulty);
@@ -90,20 +90,20 @@ blockchain_t *blockchain_deserialize(char const *path)
 
 	/* check magic */
 	if (read(fd, buffer, 4) != 4 || strcmp(buffer, HBLK_MAGIC))
-		return (CLEAN_UP, NULL);
+		return (NULL);
 	buffer[4] = 0;
 	/* check version */
 	if (read(fd, buffer, 3) != 3 || strcmp(buffer, VERSION))
-		return (CLEAN_UP, NULL);
+		return (NULL);
 
 	blockchain = malloc(sizeof(blockchain_t));
 	if (!blockchain)
-		return (CLEAN_UP, NULL);
+		return (NULL);
 	/* get endians */
 	if (read(fd, &endian, 1) != 1)
-		return (CLEAN_UP, NULL);
+		return (NULL);
 	if (read(fd, &size, 4) != 4)
-		return (CLEAN_UP, NULL);
+		return (NULL);
 	CHECK_ENDIAN(size);
 	blockchain->chain = deserialize_blocks(fd, size, endian);
 
