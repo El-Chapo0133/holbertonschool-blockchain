@@ -17,6 +17,13 @@
  */
 #include "blockchain.h"
 
+/*
+ * check_transaction - check if all transactions are valid
+ * @block: ptr to block containing transactions
+ * @all_unspent: ptr to llist of all unspent transactions
+ *
+ * Return: 0 if valid, 1 otherwise
+ */
 int check_transaction(block_t const *block, llist_t *all_unspent)
 {
 	int index;
@@ -25,7 +32,7 @@ int check_transaction(block_t const *block, llist_t *all_unspent)
 	for (index = 0; index < llist_size(block->transactions); index++)
 	{
 		t = llist_get_node_at(block->transactions, index);
-		if (i == 0 && !coinbase_is_valid(t, block->info.index))
+		if (index == 0 && !coinbase_is_valid(t, block->info.index))
 			return (1);
 		else if (!transaction_is_valid(t, all_unspent))
 			return (1);
@@ -40,9 +47,12 @@ int check_transaction(block_t const *block, llist_t *all_unspent)
  * block_is_valid - checks if this and previous block are valid
  * @block: pointer to this block in the chain
  * @prev_block: pointer to previous block in the chain or NULL
+ * @all_unspent: ptr to all unspent transactions
+ *
  * Return: 0 if valid else 1 if invalid
  */
-int block_is_valid(block_t const *block, block_t const *prev_block)
+int block_is_valid(block_t const *block, block_t const *prev_block,
+		llist_t *all_unspent)
 {
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH] = {0};
 	block_t const _genesis = _genesis;
@@ -67,6 +77,5 @@ int block_is_valid(block_t const *block, block_t const *prev_block)
 		return (1);
 	if (check_transaction(block, all_unspent))
 		return (1);
-
 	return (0);
 }
