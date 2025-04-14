@@ -19,6 +19,7 @@
  */
 
 #include "blockchain.h"
+#include "../provided/provided.h"
 
 /* local linked list library */
 #include <llist.h>
