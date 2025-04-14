@@ -24,7 +24,7 @@ int hash_tx(llist_node_t node, unsigned int id, void *arg)
 	memcpy(*(uint8_t **)arg, ((transaction_t *)node)->id, SHA256_DIGEST_LENGTH);
 	*(uint8_t **)arg += SHA256_DIGEST_LENGTH;
 	return (0);
-	(void)idx;
+	(void)id;
 }
 
 /*
@@ -47,7 +47,7 @@ uint8_t *block_hash(block_t const *block,
 	memcpy(hash_target, &block->info, offset);
 	hash_target += offset;
 	llist_for_each(block->transactions, hash_tx, &hash_target);
-	sha256((int8_t const *)block, len, hash_buf);
+	sha256(hash_target, target_len, hash_buf);
 	free(hash_target);
 	return (hash_buf);
 }
