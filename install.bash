@@ -20,9 +20,15 @@ then
 fi
 
 # llist lib given by holberton (required)
-sudo bash llist/install.bash
+bash llist/install.bash
 
 # openssl lib (required)
-sudo apt install libssl-dev
+apt install libssl-dev
 # if this doesn't work you have to clone and make the github repo
+# check libssl-dev package
+echo "libssl-dev installed version"
+# apt-cache policy libssl-dev | grep "Installed"
+dpkg -l libssl-dev
+echo "openssl installed version"
+openssl version
 
