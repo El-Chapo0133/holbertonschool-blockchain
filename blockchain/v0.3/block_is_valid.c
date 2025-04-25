@@ -55,12 +55,31 @@ int block_is_valid(block_t const *block, block_t const *prev_block,
 		llist_t *all_unspent)
 {
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH] = {0};
-	block_t const _genesis = _genesis;
+	block_t *genesis;
+	int index;
+
+	genesis = malloc(sizeof(block_t));
+	if (!genesis)
+	{
+		fprintf(stderr, "cannot allocate for genesis\n");
+		return (1);
+	}
+
+	(genesis->info).index = GENESIS_INDEX;
+	(genesis->info).difficulty = GENESIS_DIFFICULTY;
+	(genesis->info).timestamp = GENESIS_TIMESTAMP;
+	(genesis->info).nonce = GENESIS_NONCE;
+	for (index = 0; index < SHA256_DIGEST_LENGTH; index++)
+		(genesis->info).prev_hash[index] = GENESIS_PREV_HASH;
+	genesis->data.len = GENESIS_LEN;
+	memcpy(genesis->data.buffer, GENESIS_BUFFER, GENESIS_LEN);
+	memcpy(genesis->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
+
 
 	if (!block || (!prev_block && block->info.index != 0))
 		return (1);
 	if (block->info.index == 0)
-		return (memcmp(block, &_genesis, sizeof(_genesis)));
+		return (memcmp(block, &genesis, sizeof(genesis)));
 	if (block->info.index != prev_block->info.index + 1)
 		return (1);
 	if (!block_hash(prev_block, hash_buf) ||

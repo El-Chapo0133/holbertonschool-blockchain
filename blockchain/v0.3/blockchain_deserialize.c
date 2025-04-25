@@ -31,7 +31,7 @@
  *
  * Return: llist_t or NULL
  */
-llist_t deserialize_blocks(int fd, uint32_t size, uint8_t endian)
+llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endian)
 {
 	block_t *block;
 	llist_t *list = llist_create(MT_SUPPORT_TRUE);
@@ -89,11 +89,11 @@ blockchain_t *blockchain_deserialize(char const *path)
 		return (NULL);
 
 	/* check magic */
-	if (read(fd, buffer, 4) != 4 || strcmp(buffer, HBLK_MAGIC))
+	if (read(fd, buffer, 4) != 4 || strcmp(buffer, HBLK_MAGIC))
 		return (NULL);
 	buffer[4] = 0;
 	/* check version */
-	if (read(fd, buffer, 3) != 3 || strcmp(buffer, VERSION))
+	if (read(fd, buffer, 3) != 3 || strcmp(buffer, VERSION))
 		return (NULL);
 
 	blockchain = malloc(sizeof(blockchain_t));

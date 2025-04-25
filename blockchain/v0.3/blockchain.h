@@ -18,13 +18,13 @@
  * ==========================================================================
  */
 
+/* local linked list library */
+#include <llist.h>
+
 /* local header files */
 #include "../../crypto/hblk_crypto.h"
 #include "provided/endianness.h"
 #include "transaction/transaction.h"
-
-/* local linked list library */
-#include <llist.h>
 
 #include <stdio.h>
 #include <stdlib.h>
