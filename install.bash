@@ -20,7 +20,7 @@ then
 fi
 
 # llist lib given by holberton (required)
-bash llist/install.bash
+bash ./llist/install.bash
 
 # openssl lib (required)
 apt install libssl-dev
