@@ -18,9 +18,10 @@
  * ==========================================================================
  */
 
+#include "../blockchain/v0.3/blockchain.h"
+
 #include <stdio.h>
 #include <string.h>
-
 
 #include "llist.h"
 
@@ -43,6 +44,7 @@ typedef struct gball_s
 
 /* gumball functions */
 int (*gumball(char *cmd))(blockchain_t **, block_t **, EC_KEY **, char *, char *);
+
 
 
 
