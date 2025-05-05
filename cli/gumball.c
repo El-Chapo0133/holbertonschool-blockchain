@@ -36,7 +36,7 @@ int (*gumball(char *cmd))(blockchain_t **, block_t **, EC_KEY **, char *, char *
 		{ "info", &bi_info },
 		{ "load", &bi_load },
 		{ "save", &bi_save },
-	}
+	};
 
 	if (!cmd)
 		return (NULL);
