@@ -31,7 +31,6 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 
 	if (!pub)
 		return (NULL);
-	printf("%s\n", pub);
 	/* create a key from the curve name */
 	key = EC_KEY_new_by_curve_name(EC_CURVE);
 	if (!key)
