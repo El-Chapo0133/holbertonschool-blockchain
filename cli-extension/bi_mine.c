@@ -98,6 +98,8 @@ static unspent_tx_out_t *update_utxo(state_t *state, block_t *block,
 static int cli_mine_process(state_t *state, block_t *block,
 			    block_t *prev_block, transaction_t *coinbase_tx)
 {
+	char *buffer;
+	size_t len;
 	unspent_tx_out_t *utxo = NULL;
 
 	while (!llist_remove_node(
@@ -109,9 +111,7 @@ static int cli_mine_process(state_t *state, block_t *block,
 	llist_for_each(state->tx_pool, add_transaction, block);
 	block->info.difficulty = blockchain_difficulty(state->blockchain);
 	llist_add_node(block->transactions, coinbase_tx, ADD_NODE_FRONT);
-        printf("Foo\n");
 	block_mine(block);
-        printf("Foo\n");
 
 
 	if (block_is_valid(block, prev_block, state->blockchain->unspent) != 0)
@@ -147,7 +147,11 @@ static int cli_mine_process(state_t *state, block_t *block,
 
 	llist_add_node(state->blockchain->chain, block, ADD_NODE_REAR);
 	llist_add_node(state->blockchain->unspent, utxo, ADD_NODE_REAR);
-	fprintf(stdout, "Successfully mined a block\n");
+	fprintf(stdout, "Successfully mined a block %d\n", block->info.difficulty);
+
+	buffer = serialize_block(block);
+	send_message(buffer, strlen(buffer));
+	free(buffer);
 
 	return ((state->status = EXIT_SUCCESS));
 }

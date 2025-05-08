@@ -36,12 +36,13 @@ int (*gumball(char *cmd))(state_t *)
 		{ "info", &cli_info },
 		{ "load", &cli_load },
 		{ "save", &cli_save },
+		{ "exit", &cli_exit },
 	};
 
 	if (!cmd)
 		return (NULL);
 
-	for (index = 0; index < 8; index++)
+	for (index = 0; index < 9; index++)
 	{
 		if (!strcmp(cmd, pot[index].cmd))
 			return (pot[index].f);

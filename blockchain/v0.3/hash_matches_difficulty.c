@@ -29,25 +29,24 @@
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 		uint32_t difficulty)
 {
-	uint32_t count = 0;
-	int index;
-	uint8_t *ptr = (uint8_t *)hash,
-		*max_ptr = (uint8_t *)hash + SHA256_DIGEST_LENGTH;
+	uint32_t zeroBitsNeeded = difficulty;
+	uint32_t zeroBitsCount = 0;
+	int i, bit;
 
-	if (!hash)
-		return (0);
-	/* loop over the 32 8-bits (because it's an i bit ptr) */
-	for (; ptr < max_ptr; ptr++)
+	for (i = 0; i < SHA256_DIGEST_LENGTH; ++i)
 	{
-		/* loop into the 8-bits backward (little-endian) */
-		for (index = 7; index >= 0; index--)
+		for (bit = 7; bit >= 0; --bit)
 		{
-			if ((*ptr >> index) & 1)
-				goto out;
-			count++;
+			if ((hash[i] >> bit) & 1)
+			{
+				return (zeroBitsCount >= zeroBitsNeeded ? 1 : 0);
+			}
+			else
+			{
+				zeroBitsCount++;
+			}
 		}
 	}
-out:
 
-	return (count >= difficulty);
+	return (zeroBitsCount >= zeroBitsNeeded ? 1 : 0);
 }

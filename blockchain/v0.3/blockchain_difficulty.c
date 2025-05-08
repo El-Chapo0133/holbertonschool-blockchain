@@ -28,23 +28,45 @@
  */
 uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 {
-	uint64_t elapsed, expected;
-	block_t *last, *last_adjusted;
+	block_t *last_block, *adjusted_block;
+	uint64_t expected_time, actual_time;
+	size_t blockchain_size = llist_size(blockchain->chain);
 
-	last = llist_get_tail(blockchain->chain);
-	if (!last || last->info.index == 0 ||
-		last->info.index % DIFFICULTY_ADJUSTMENT_INTERVAL != 0)
-		return (last->info.difficulty);
+	if (!blockchain || blockchain_size < 2)
+	{
+		fprintf(stderr, "Invalid blockchain\n");
+		return (0);
+	}
+	last_block = llist_get_node_at(blockchain->chain, blockchain_size - 1);
 
-	last_adjusted = llist_get_node_at(blockchain->chain,
-			last->info.index + 1 - DIFFICULTY_ADJUSTMENT_INTERVAL);
-	elapsed = last->info.timestamp - last_adjusted->info.timestamp;
-	expected = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
+	if (!last_block)
+	{
+		fprintf(stderr, "Failed to retrieve the last block\n");
+		return (0);
+	}
 
-	if ((elapsed * 2) < expected)
-		return (last->info.difficulty + 1);
-	else if (elapsed > expected * 2)
-		return (last->info.difficulty - 1);
-	return (last->info.difficulty);
+	if (last_block->info.index % DIFFICULTY_ADJUSTMENT_INTERVAL == 0 &&
+	last_block->info.index != 0)
+	{
+		adjusted_block = llist_get_node_at(blockchain->chain,
+						   blockchain_size -
+						   DIFFICULTY_ADJUSTMENT_INTERVAL);
+		if (!adjusted_block)
+		{
+			fprintf(stderr, "Failed to retrieve the adjusted block\n");
+			return (0);
+		}
+
+		expected_time = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
+		actual_time = last_block->info.timestamp - adjusted_block->info.timestamp;
+
+		if (actual_time < expected_time / 2)
+			return (last_block->info.difficulty + 1);
+
+		else if (actual_time > expected_time * 2)
+			return (last_block->info.difficulty > 0 ?
+			last_block->info.difficulty - 1 : 0);
+	}
+	return (last_block->info.difficulty);
 }
 

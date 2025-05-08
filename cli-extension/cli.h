@@ -26,6 +26,12 @@
 #include <unistd.h>
 #include <errno.h>
 #include <limits.h>
+/* sockets */
+#include <arpa/inet.h>
+#include <ctype.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netdb.h>
 
 #include <llist.h>
 
@@ -36,6 +42,11 @@
 
 #define BLANK " \t\n"
 #define PROMPT "> "
+
+#define PORT "8080"
+#define HOST_LEN 256
+#define MESSAGE_BUFFER_SIZE 8192 /* 2^13 */
+#define BACKLOG 8 /* queue length of clients */
 
 /**
  * struct state_s - CLI state structure
@@ -86,8 +97,17 @@ int cli_save(state_t *state);
 int cli_send(state_t *state);
 int cli_wallet_load(state_t *state);
 int cli_wallet_save(state_t *state);
+int cli_exit(state_t *state);
 void state_init(state_t *state);
 void state_destroy(state_t *state);
+
+/* socket */
+void close_and_exit(int fd, struct addrinfo *res);
+int connect_socket(void);
+int send_message(char *object, size_t object_len);
+void close_socket(void);
+
+char *serialize_block(block_t *block);
 
 #endif /* CLI_H */
  

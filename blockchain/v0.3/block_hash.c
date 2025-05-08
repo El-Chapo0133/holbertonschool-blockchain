@@ -19,14 +19,6 @@
 #include "blockchain.h"
 
 
-int hash_tx(llist_node_t node, unsigned int id, void *arg)
-{
-	memcpy(*(uint8_t **)arg, ((transaction_t *)node)->id, SHA256_DIGEST_LENGTH);
-	*(uint8_t **)arg += SHA256_DIGEST_LENGTH;
-	return (0);
-	(void)id;
-}
-
 /*
  * block_hash - computes the hash of a block_t
  *
@@ -35,19 +27,44 @@ int hash_tx(llist_node_t node, unsigned int id, void *arg)
 uint8_t *block_hash(block_t const *block,
 		uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 {
-	int tx_len, target_len, offset = sizeof(block->info) + block->data.len;
-	int8_t *hash_target;
+	size_t data_size;
+	size_t offset;
+	uint8_t *data_to_hash;
+	int i;
+	transaction_t *tx;
 
-	if (!llist_is_empty(block->transactions))
-		tx_len = llist_size(block->transactions);
-	target_len = offset + 32 * tx_len;
-	hash_target = malloc(target_len);
-	if (!hash_target)
+	if (!block || !hash_buf)
 		return (NULL);
-	memcpy(hash_target, &block->info, offset);
-	hash_target += offset;
-	llist_for_each(block->transactions, hash_tx, &hash_target);
-	sha256(hash_target, target_len, hash_buf);
-	free(hash_target);
+
+	data_size = sizeof(block->info) + block->data.len;
+
+	for (i = 0; i < llist_size(block->transactions); i++)
+	{
+		tx = llist_get_node_at(block->transactions, i);
+		data_size += SHA256_DIGEST_LENGTH;
+	}
+
+	data_to_hash = malloc(data_size);
+
+	if (!data_to_hash)
+		return (NULL);
+
+	memcpy(data_to_hash, &block->info, sizeof(block->info));
+	memcpy(data_to_hash + sizeof(block->info),
+	       block->data.buffer, block->data.len);
+
+	offset = sizeof(block->info) + block->data.len;
+
+	for (i = 0; i < llist_size(block->transactions); i++)
+	{
+		tx = llist_get_node_at(block->transactions, i);
+		memcpy(data_to_hash + offset, tx->id, SHA256_DIGEST_LENGTH);
+		offset += SHA256_DIGEST_LENGTH;
+	}
+
+	SHA256(data_to_hash, data_size, hash_buf);
+
+	free(data_to_hash);
+
 	return (hash_buf);
 }

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -I.
-LIBS = -L../blockchain/v0.3 -lhblk_blockchain -L../crypto -lhblk_crypto -lllist -lssl -lcrypto -pthread
+LIBS = -L. -lhblk_blockchain -lhblk_crypto -lllist -lssl -lcrypto -pthread
 CTAGS = ctags
 TAGS = .tags
 
@@ -8,11 +8,11 @@ RM = rm -f
 
 SRC0 = $(wildcard *.c)
 OBJ0 = $(patsubst %.c,%.o,$(SRC0))
-NAME0 = cli_base
+NAME0 = cli
 
 HEADERS = $(wildcard *.h)
 
-.PHONY: all cli oclean clean distclean tags betty
+.PHONY: all cli oclean clean distclean tags debug betty
 
 all: cli
 

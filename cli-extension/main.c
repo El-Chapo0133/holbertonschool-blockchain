@@ -86,6 +86,7 @@ int main(void)
         ssize_t nread;
 
         state_init(&state);
+	connect_socket();
         display_intro_message();
 
 	while (1)
@@ -107,6 +108,7 @@ int main(void)
 
 	}
 
+	close_socket();
         status = state.status;
         state_destroy(&state);
 	return (status);
