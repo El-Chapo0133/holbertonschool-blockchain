@@ -92,6 +92,7 @@ int accept_messages(int socket_fd)
 	/* stdout client address */
 	inet_ntop(AF_INET, &client.sin_addr, buffer, INET_ADDRSTRLEN);
 	fprintf(stdout, "Client connected: %s\n", buffer);
+	display_genesis_block();
 
 	/* receive the message to the buffer */
 	bytes_read = recv(client_fd, buffer, BUFFER_SIZE, 0);
