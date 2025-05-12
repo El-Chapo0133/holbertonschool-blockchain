@@ -32,10 +32,8 @@ block_t *deserialize_block(char *buffer)
 		return (NULL);
 	}
 
-	memcpy(block, buffer, 24);
-	offset += 24;
-	memcpy(block->info.prev_hash, buffer + offset, SHA256_DIGEST_LENGTH);
-	offset += SHA256_DIGEST_LENGTH;
+	memcpy(block, buffer, sizeof(block_info_t));
+	offset += sizeof(block_info_t);
 	memcpy(block->hash, buffer + offset, SHA256_DIGEST_LENGTH);
 	offset += SHA256_DIGEST_LENGTH;
 	memcpy(&transactions_len, buffer + offset, 4);

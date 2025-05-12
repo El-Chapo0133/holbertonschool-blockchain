@@ -30,7 +30,6 @@ char *serialize_block(block_t *block)
 	int transaction_len;
 	int offset = 0;
 
-	printf("%s\n", block->info.prev_hash);
 	memcpy(buffer, &block->info, sizeof(block_info_t));
 	offset += sizeof(block_info_t);
 	memcpy(buffer + offset, block->hash, SHA256_DIGEST_LENGTH);
@@ -39,7 +38,6 @@ char *serialize_block(block_t *block)
 	memcpy(buffer + offset, &transaction_len, sizeof(int));
 	offset += sizeof(int);
 
-	
 
 	return (strdup(buffer));
 }
