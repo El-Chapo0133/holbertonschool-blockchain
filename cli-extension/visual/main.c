@@ -21,12 +21,18 @@
 
 int parse_request(int client_fd, char *buffer)
 {
-	printf("%s [%ld] from %d\n", buffer, strlen(buffer), client_fd);
+	printf("'%s' [%ld]\n", buffer, strlen(buffer));
 	deserialize_block(buffer);
+
+	(void)client_fd;
 	return (1);
 }
 
-
+void display_init_message(void)
+{
+	fprintf(stdout, "|> Welcome to the Blockchain Visualisation Program :)\n");
+	fprintf(stdout, "|> The program is going to wait for a blockchain_cli program to connect\n");
+}
 
 int main(int argc, char **argv)
 {
@@ -38,4 +44,6 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Cannot start socket server :(\n");
 		return (EXIT_FAILURE);
 	}
+
+	display_init_message();
 }

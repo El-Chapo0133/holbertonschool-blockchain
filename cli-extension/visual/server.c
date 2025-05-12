@@ -58,8 +58,7 @@ int start_server(void)
 		return (EXIT_FAILURE);
 	}
 	/* Server binded and listening */
-	fprintf(stdout, "Server listening on port %d\n",
-			ntohs(server.sin_port));
+	fprintf(stdout, "|- Listening for a blockchain\n");
 	while (1)
 		if (accept_messages(socket_fd) != EXIT_SUCCESS)
 			break;
@@ -85,13 +84,13 @@ int accept_messages(int socket_fd)
 	client_fd = accept(socket_fd, (struct sockaddr *)&client, &client_size);
 	if (client_fd < 0)
 	{
-		fprintf(stdout, "Accept failure, socket fd: %d", socket_fd);
+		fprintf(stderr, "Accept failure, socket fd: %d", socket_fd);
 		return (EXIT_FAILURE);
 	}
 
 	/* stdout client address */
 	inet_ntop(AF_INET, &client.sin_addr, buffer, INET_ADDRSTRLEN);
-	fprintf(stdout, "Client connected: %s\n", buffer);
+	fprintf(stdout, "|> Connected blockchain address: %s\n", buffer);
 	display_genesis_block();
 
 	/* receive the message to the buffer */
@@ -99,7 +98,7 @@ int accept_messages(int socket_fd)
 	if (bytes_read > 0)
 	{
 		buffer[bytes_read] = 0; /* mark end of string */
-		fprintf(stdout, "Raw request: \"%s\"\n", buffer);
+		/* fprintf(stdout, "Raw request: \"%s\"\n", buffer); */
 		/* parse message happens here */
 		parse_request(client_fd, buffer);
 	}
