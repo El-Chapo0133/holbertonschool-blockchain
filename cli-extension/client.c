@@ -89,5 +89,8 @@ int send_message(char *object, size_t object_len)
 {
 	if (!socket_fd || socket_fd == -1)
 		fprintf(stderr, "Socket is not connected\n");
+#ifdef DEBUG
+	printf("Bytes to send :%d\n", object_len);
+#endif
 	return (send(socket_fd, object, object_len, 0));
 }

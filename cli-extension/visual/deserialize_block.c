@@ -39,7 +39,10 @@ block_t *deserialize_block(char *buffer)
 	memcpy(&transactions_len, buffer + offset, 4);
 	offset += 4;
 
+	printf("%ld\n", block->info.timestamp);
 	printf("%d\n", block->info.difficulty);
+	printf("%ld\n", block->info.nonce);
+	printf("%s\n", block->info.prev_hash);
 	printf("%s\n", block->hash);
 
 	return (block);

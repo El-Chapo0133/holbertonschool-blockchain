@@ -48,6 +48,8 @@
 #define MESSAGE_BUFFER_SIZE 8192 /* 2^13 */
 #define BACKLOG 8 /* queue length of clients */
 
+#define SERIALIZED_BUFFER_LEN 1024
+
 /**
  * struct state_s - CLI state structure
  *
@@ -71,6 +73,17 @@ typedef struct state_s
         blockchain_t *blockchain;
         llist_t *tx_pool;
 } state_t;
+
+/**
+ * struct serialized_block_s: define a serialized block
+ * @buffer: buffer of the serialized block
+ * @len: len of the buffer
+ */
+typedef struct serialized_block_s
+{
+	char buffer[SERIALIZED_BUFFER_LEN];
+	size_t len;
+} serialized_block_t;
 
 /**
  * struct gball_s: struct to match a cmd to a function
@@ -107,7 +120,8 @@ int connect_socket(void);
 int send_message(char *object, size_t object_len);
 void close_socket(void);
 
-char *serialize_block(block_t *block);
+int serialize_block_transactions(serialized_block_t *b, block_t *block);
+serialized_block_t *serialize_block(block_t *block);
 
 #endif /* CLI_H */
  

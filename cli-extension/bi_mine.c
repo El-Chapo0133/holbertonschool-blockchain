@@ -98,6 +98,7 @@ static unspent_tx_out_t *update_utxo(state_t *state, block_t *block,
 static int cli_mine_process(state_t *state, block_t *block,
 			    block_t *prev_block, transaction_t *coinbase_tx)
 {
+	serialized_block_t *serialized_block;
 	char *buffer;
 	size_t len;
 	unspent_tx_out_t *utxo = NULL;
@@ -149,9 +150,9 @@ static int cli_mine_process(state_t *state, block_t *block,
 	llist_add_node(state->blockchain->unspent, utxo, ADD_NODE_REAR);
 	fprintf(stdout, "Successfully mined a block %d\n", block->info.difficulty);
 
-	buffer = serialize_block(block);
-	send_message(buffer, strlen(buffer));
-	free(buffer);
+	serialized_block = serialize_block(block);
+	send_message(serialized_block->buffer, serialized_block->len);
+	free(serialized_block);
 
 	return ((state->status = EXIT_SUCCESS));
 }

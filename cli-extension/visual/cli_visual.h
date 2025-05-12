@@ -93,4 +93,8 @@ int parse_request(int client_sd, char *buf);
 /* deserialize */
 block_t *deserialize_block(char *buffer);
 
+/* displays */
+void display_genesis_block(void);
+void display_block(block_t *block);
+
 #endif

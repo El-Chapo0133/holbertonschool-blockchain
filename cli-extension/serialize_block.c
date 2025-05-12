@@ -19,25 +19,56 @@
 #include "cli.h"
 
 /**
+ * serialize_block_transactions - serialize the transactions
+ * @b: serialized_block_t
+ * @block: block_t
+ *
+ * Return: 1 on success 0 on failure
+ */
+int serialize_block_transactions(serialized_block_t *b, block_t *block)
+{
+	(void)b, (void)block;
+	return (1);
+}
+
+
+/**
  * serialize_block - serialize a block into a char*
  * @block: block to serialize
  *
- * Return: array of char
+ * Return: ptr to serialized_block_t or NULL
  */
-char *serialize_block(block_t *block)
+serialized_block_t *serialize_block(block_t *block)
 {
-	char buffer[1024];
+	serialized_block_t *b;
 	int transaction_len;
-	int offset = 0;
+	size_t offset = 0;
 
-	memcpy(buffer, &block->info, sizeof(block_info_t));
+	b = malloc(sizeof(serialized_block_t));
+	if (!b) /* uh oh :( */
+	{
+		fprintf(stderr, "Cannot allocate serialized_block_t :(\n");
+		return (NULL);
+	}
+	b->len = 0;
+
+	memcpy(b->buffer, &block->info, sizeof(block_info_t));
 	offset += sizeof(block_info_t);
-	memcpy(buffer + offset, block->hash, SHA256_DIGEST_LENGTH);
+	memcpy(b->buffer + offset, block->hash, SHA256_DIGEST_LENGTH);
 	offset += SHA256_DIGEST_LENGTH;
 	transaction_len = llist_size(block->transactions);
-	memcpy(buffer + offset, &transaction_len, sizeof(int));
+	memcpy(b->buffer + offset, &transaction_len, sizeof(int));
 	offset += sizeof(int);
 
+	if (!serialize_block_transactions(b, block))
+	{ /* uh oh :( put 0 in transaction_len */
+		fprintf(stderr, "Cannot serialize transactions :(\n");
+		memcpy(b->buffer + offset, 0, 4);
+	}
+	b->len += offset;
 
-	return (strdup(buffer));
+#ifdef DEBUG
+	printf("Length of serialized block array: %d\n", b->len);
+#endif
+	return (b);
 }
