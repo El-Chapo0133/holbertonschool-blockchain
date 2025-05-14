@@ -21,8 +21,12 @@
 
 int parse_request(int client_fd, char *buffer)
 {
+        block_t *block;
+
 	/*printf("'%s' [%ld]\n", buffer, strlen(buffer));*/
-	deserialize_block(buffer);
+	block = deserialize_block(buffer);
+
+        display_block(block);
 
 	(void)client_fd;
 	return (1);

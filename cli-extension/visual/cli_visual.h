@@ -96,5 +96,6 @@ block_t *deserialize_block(char *buffer);
 /* displays */
 void display_genesis_block(void);
 void display_block(block_t *block);
+void print_hex_sha256(uint8_t *buffer);
 
 #endif
