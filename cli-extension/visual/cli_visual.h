@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
 
 #include <llist.h>
 
@@ -97,5 +98,6 @@ block_t *deserialize_block(char *buffer);
 void display_genesis_block(void);
 void display_block(block_t *block);
 void print_hex_sha256(uint8_t *buffer);
+void print_x_spaces(int x);
 
 #endif

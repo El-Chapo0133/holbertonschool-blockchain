@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic -I.
-LIBS =  -lllist -pthread
+LIBS =  -lllist -pthread -lm
 
 RM = rm -f
 
@@ -19,7 +19,7 @@ oclean:
 	$(RM) $(OBJ0)
 
 cli_visual: $(OBJ0)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS) 
 
 debug: $(OBJ0)
 	$(CC) $(CFLAGS) $(LIBS) $^ -o $@ -g

@@ -93,16 +93,18 @@ int accept_messages(int socket_fd)
 	fprintf(stdout, "|> Connected blockchain address: %s\n", buffer);
 	display_genesis_block();
 
-	/* receive the message to the buffer */
-	bytes_read = recv(client_fd, buffer, BUFFER_SIZE, 0);
-	if (bytes_read > 0)
-	{
-		buffer[bytes_read] = 0; /* mark end of string */
-		/* fprintf(stdout, "Raw request: \"%s\"\n", buffer); */
-		/* parse message happens here */
-		parse_request(client_fd, buffer);
-	}
+        while (1)
+        {
+                /* receive the message to the buffer */
+                bytes_read = recv(client_fd, buffer, BUFFER_SIZE, 0);
+                if (bytes_read > 0)
+                {
+                        buffer[bytes_read] = 0; /* mark end of string */
+                        /* fprintf(stdout, "Raw request: \"%s\"\n", buffer); */
+                        /* parse message happens here */
+                        parse_request(client_fd, buffer);
+                }
+        }
 
-	close(client_fd);
 	return (EXIT_SUCCESS);
 }

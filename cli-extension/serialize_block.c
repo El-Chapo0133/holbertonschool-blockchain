@@ -25,9 +25,10 @@
  *
  * Return: 1 on success 0 on failure
  */
-int serialize_block_transactions(serialized_block_t *b, block_t *block)
+int serialize_block_transactions(serialized_block_t *b, block_t *block,
+                size_t offset)
 {
-	(void)b, (void)block;
+	(void)b, (void)block, (void)offset;
 	return (1);
 }
 
@@ -40,35 +41,35 @@ int serialize_block_transactions(serialized_block_t *b, block_t *block)
  */
 serialized_block_t *serialize_block(block_t *block)
 {
-	serialized_block_t *b;
+	serialized_block_t *serialized_block;
 	int transaction_len;
 	size_t offset = 0;
 
-	b = malloc(sizeof(serialized_block_t));
-	if (!b) /* uh oh :( */
+	serialized_block = malloc(sizeof(serialized_block_t));
+	if (!serialized_block) /* uh oh :( */
 	{
 		fprintf(stderr, "Cannot allocate serialized_block_t :(\n");
 		return (NULL);
 	}
-	b->len = 0;
+	serialized_block->len = 0;
 
-	memcpy(b->buffer, &block->info, sizeof(block_info_t));
-	offset += sizeof(block_info_t);
-	memcpy(b->buffer + offset, block->hash, SHA256_DIGEST_LENGTH);
+        memcpy(serialized_block->buffer, &block->info, sizeof(block_info_t));
+        offset += sizeof(block_info_t);
+	memcpy(serialized_block->buffer + offset, block->hash, SHA256_DIGEST_LENGTH);
 	offset += SHA256_DIGEST_LENGTH;
 	transaction_len = llist_size(block->transactions);
-	memcpy(b->buffer + offset, &transaction_len, sizeof(int));
+	memcpy(serialized_block->buffer + offset, &transaction_len, sizeof(int));
 	offset += sizeof(int);
 
-	if (!serialize_block_transactions(b, block))
+	if (!serialize_block_transactions(serialized_block, block, offset))
 	{ /* uh oh :( put 0 in transaction_len */
 		fprintf(stderr, "Cannot serialize transactions :(\n");
-		memcpy(b->buffer + offset, 0, 4);
+		memcpy(serialized_block->buffer + offset, 0, 4);
 	}
-	b->len += offset;
+	serialized_block->len += offset;
 
 #ifdef DEBUG
-	printf("Length of serialized block array: %d\n", b->len);
+	printf("Length of serialized block array: %d\n", serialized_block->len);
 #endif
-	return (b);
+	return (serialized_block);
 }

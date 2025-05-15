@@ -37,7 +37,7 @@ void close_socket(void)
  */
 void close_and_exit(int fd, struct addrinfo *res)
 {
-	close(fd);
+        close(fd);
 	freeaddrinfo(res);
 	exit(1);
 }
@@ -68,7 +68,8 @@ int connect_socket(void)
 	/* connect to the sockets with the infos */
 	if (connect(socket_fd, res->ai_addr, res->ai_addrlen) == -1)
 	{
-		fprintf(stdout, "Cannot connect to the socket %s:" PORT "\n", host);
+		fprintf(stdout, "Cannot connect to the socket %s:" PORT "\n",
+                                host);
 		close_and_exit(socket_fd, res);
 	}
 #ifdef DEBUG

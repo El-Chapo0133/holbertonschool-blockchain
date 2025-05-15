@@ -120,7 +120,8 @@ int connect_socket(void);
 int send_message(char *object, size_t object_len);
 void close_socket(void);
 
-int serialize_block_transactions(serialized_block_t *b, block_t *block);
+int serialize_block_transactions(serialized_block_t *b, block_t *block,
+                size_t offset);
 serialized_block_t *serialize_block(block_t *block);
 
 #endif /* CLI_H */

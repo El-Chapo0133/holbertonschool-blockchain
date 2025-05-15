@@ -21,9 +21,6 @@
 /**
  * sum_unspent_amounts - program that iterates over unspent
  * transaction outputs and accumulates their amounts
- *
- * this function is used to calculate the total unspent amount
- *
  * @node: a pointer to the unspent_tx_out_t structure
  *        (represents an unspent transaction output)
  * @idx: the index of the current item in the list (unused)
@@ -48,13 +45,6 @@ static int sum_unspent_amounts(void *node,
 /**
  * cli_info - program that provides a command line interface
  * summary of the blockchain state
- *
- * this function displays:
- * - the number of blocks,
- * - unspent transaction outputs,
- * - transactions in the pool,
- * - total coins
- *
  * @state: a pointer to the state_t structure
  *         containing all blockchain information
  *
